@@ -14,6 +14,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { UserDetails } from "../Context/UserContext";
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -38,7 +39,11 @@ const SignIn = ({ auth }) => {
       setUser(userData);
       navigate(`/${userData.role}/home`);
     } catch (error) {
-      console.log(error);
+      toast.error(
+        error.message === "EMAIL_NOT_FOUND"
+          ? "Email not found"
+          : "Invalid password"
+      );
     }
   };
 
