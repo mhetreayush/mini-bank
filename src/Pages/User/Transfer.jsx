@@ -67,6 +67,7 @@ const Transfer = () => {
       );
 
       formRef.current.reset();
+      toast.success("Transfer Successful");
     } catch (err) {
       toast.error("No user found with this account number");
     }
