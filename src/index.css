@@ -1,13 +1,27 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  .tableMain {
+    @apply border rounded-md;
+  }
+  .tableMain .tableBody {
+    @apply grid text-left p-2 bg-primaryGray text-white;
+  }
+  .tableMain .tableCell {
+    @apply grid p-2 odd:bg-gray-200;
+  }
+  .button {
+    @apply p-2  text-white rounded-md;
+  }
+  .primary {
+    @apply bg-primaryGray;
+  }
+  .red {
+    @apply bg-primaryRed;
+  }
+  .inputTextClass {
+    @apply w-full p-2 rounded-md border-2 border-gray-300;
+  }
 }
