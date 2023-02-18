@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -24,16 +23,13 @@ const SignUp = ({ auth }) => {
     const password = data.get("password");
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         console.log(user);
         alert("Logged in!");
-        // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        console.log(error);
+        toast.error("Something went wrong!");
       });
   };
 
@@ -80,7 +76,7 @@ const SignUp = ({ auth }) => {
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  autoComplete={false}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,7 +87,7 @@ const SignUp = ({ auth }) => {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  autoComplete={false}
                 />
               </Grid>
             </Grid>
@@ -105,7 +101,7 @@ const SignUp = ({ auth }) => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

@@ -3,15 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  .tableMain {
-    @apply border rounded-md;
-  }
-  .tableMain .tableBody {
-    @apply grid text-left p-2 bg-primaryGray text-white;
-  }
-  .tableMain .tableCell {
-    @apply grid p-2 odd:bg-gray-200;
-  }
   .button {
     @apply p-2  text-white rounded-md;
   }
@@ -21,7 +12,17 @@
   .red {
     @apply bg-primaryRed;
   }
-  .inputTextClass {
-    @apply w-full p-2 rounded-md border-2 border-gray-300;
+
+  .tableMainRow {
+    @apply bg-primaryGray text-white;
+  }
+  .tableMainRow .cell {
+    @apply p-2;
+  }
+  .tableRow {
+    @apply odd:bg-gray-300;
+  }
+  .tableCell {
+    @apply p-2;
   }
 }

@@ -2,41 +2,45 @@ import { useState } from "react";
 import FuzzySearch from "fuzzy-search";
 import Loader from "./Loader";
 import CreditDebitModal from "./CreditDebitModal";
-const UserSelect = ({ users, setTriggerUpdate }) => {
+const UserSelect = ({ users, setTriggerUpdate, toUpdate }) => {
   const [searchValue, setSearchValue] = useState("");
-  const searcher = new FuzzySearch(users, ["name"], {
+  const searcher = new FuzzySearch(users, ["name", "accNo", "email"], {
     caseSensitive: false,
     sort: true,
   });
   var result = [
     ...searcher.search(searchValue),
-    ...users.filter((item) =>
-      searchValue.toLowerCase().includes(item.name.toLowerCase())
+    ...users.filter(
+      (item) =>
+        searchValue.toLowerCase().includes(item.name.toLowerCase()) ||
+        searchValue.toLowerCase().includes(item.accNo.toLowerCase()) ||
+        searchValue.toLowerCase().includes(item.email.toLowerCase())
     ),
   ];
   result = [...new Set(result)];
   const SearchResult = ({ result }) => {
     return result.length > 0 ? (
       <>
-        <i>Click an user to update balance.</i>
-        <div className="tableMain">
-          <div className="tableBody grid-cols-4">
-            <div>Name</div>
-            <div>Acc No.</div>
-            <div>Email</div>
-            <div>Balance</div>
-          </div>
-          <div className="flex flex-col w-full  divide-y divide-black divide">
+        {toUpdate && <i>Click an user to update balance.</i>}
+        <div className="flex w-full  overflow-x-auto">
+          <table className="w-full">
+            <tr className="tableMainRow">
+              <td className="cell">Name</td>
+              <td className="cell">Acc No.</td>
+              <td className="cell">Email</td>
+              <td className="cell">Balance</td>
+            </tr>
             {result.map((item, idx) => {
               return (
                 <CreditDebitModal
                   key={idx}
                   {...item}
                   setTriggerUpdate={setTriggerUpdate}
+                  toUpdate={toUpdate}
                 />
               );
             })}
-          </div>
+          </table>
         </div>
       </>
     ) : (

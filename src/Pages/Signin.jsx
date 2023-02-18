@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -25,7 +24,7 @@ const SignIn = ({ auth }) => {
     if (isLoggedIn) {
       navigate("/user/home");
     }
-  }, [isLoggedIn, user]);
+  }, [isLoggedIn, user, navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,8 +33,6 @@ const SignIn = ({ auth }) => {
     const password = data.get("password");
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log(user);
-      console.log(user.user.email);
       const userData = (await getDoc(doc(db, "users", user.user.email))).data();
       setIsLoggedIn(true);
       setUser(userData);
@@ -98,18 +95,10 @@ const SignIn = ({ auth }) => {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+
+            <Link href="/signup" variant="body2">
+              Don't have an account? Sign Up
+            </Link>
           </Box>
         </Box>
       </Container>

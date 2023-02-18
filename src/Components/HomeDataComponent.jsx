@@ -1,12 +1,13 @@
 const HomeDataComponent = ({ arr }) => {
   const len = arr.length;
+
   const width = `calc(100% / ${len})`;
   return (
-    <div className="flex gap-x-5 gap-y-4">
+    <div className="flex flex-col lg:flex-row gap-5 gap-y-4">
       {arr.map((item, idx) => {
         return (
           <div
-            className="bg-primaryGray rounded-md p-4"
+            className="bg-primaryGray rounded-md p-4 !w-full lg:w-full"
             style={{ width }}
             key={idx}
           >
