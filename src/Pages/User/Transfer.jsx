@@ -73,7 +73,7 @@ const Transfer = () => {
     }
   };
   const handleCancel = () => {
-    toast.success("Transfer Cancelled");
+    formRef.current.reset();
   };
   return (
     <div>
